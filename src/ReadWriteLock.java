@@ -24,6 +24,9 @@ public class ReadWriteLock {
         //unprotected section, so the write method relies on the count
         String output = this.businessRead(key);
         
+        // The increments and decrements have to be enclosed in the synchronized block.
+        // They are actually 3 steps - Read from Memory, increment, write back to Mem
+        // This is why AtomicIntegers have been introduced.
         synchronized(this){
             this.readCount--;
         }
